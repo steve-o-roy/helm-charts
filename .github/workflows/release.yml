@@ -27,6 +27,11 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
+      - name: Build dependencies
+        run: |
+          helm repo add dandydev https://dandydeveloper.github.io/charts
+          cd charts/odk-central && helm dependency build
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         env:
